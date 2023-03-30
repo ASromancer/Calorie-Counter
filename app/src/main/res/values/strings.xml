@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- home_page strings -->
+
+    <string name="app_name">Calorie Counter</string>
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="___2100_string">/ 2100</string>
+    <string name="_1780_string">1780</string>
+    <string name="kcal_string">kcal</string>
+    <string name="height__string">Height:</string>
+    <string name="weight__string">Weight:</string>
+    <string name="_170cm_string">170cm</string>
+    <string name="_64kg_string">64kg</string>
+    <string name="today_txt_string">Today</string>
+    <string name="food_txt_string">Foods</string>
+    <string name="food_txt_ek1_string">Charts</string>
+    <string name="meat_string">Meat</string>
+    <string name="vegetable_string">Vegetable</string>
+    <string name="fruits_string">Fruits</string>
+    <string name="more_string">More</string>
+    <string name="more_ek1_string">More</string>
+    <string name="label_login">LOGIN</string>
+    <string name="hint_enter_phone_number">Enter phone number</string>
+    <string name="label_phone_number">Phone Number</string>
+    <string name="label_resend_otp">Resend OTP</string>
+    <string name="label_verify">Verify</string>
+    <string name="label_register">Register</string>
+    <string name="label_update">Update</string>
+    <string name="hint_search_outlets_or_dish">Search Outlets or Dish</string>
+    <string name="label_cart">Cart</string>
+    <string name="label_pickup">Pickup</string>
+    <string name="label_delivery">Delivery</string>
+    <string name="label_to_pay">To Pay</string>
+    <string name="label_enter_delivery_location">Enter Delivery Location</string>
+    <string name="label_no_items_in_cart">No items in cart</string>
+    <string name="label_veg_only">Veg only</string>
+    <string name="label_search_outlets_or_dish">Search Outlets or Dish</string>
+    <string name="label_outlets">Outlets</string>
+    <string name="hint_feedback_optional">Feedback (Optional)</string>
+    <string name="barChart_card_title">Consumed Calories</string>
+    <string name="calories_summary_card_title">Calories Summary</string>
+    <string name="max_calories">Max</string>
+    <string name="min_calories">Min</string>
+    <string name="average_calories">Average</string>
+    <string name="total_calories">Total</string>
+</resources>

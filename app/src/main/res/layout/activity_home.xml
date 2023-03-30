@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.HomeActivity">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/accent"
+        android:foreground="@color/accent"
+        android:foregroundGravity="bottom"
+        app:itemTextColor="@android:color/white"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="673dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_home"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/myfont"
+                android:text="Today"
+                android:textColor="@color/accent"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/progress_layout"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp">
+
+
+                        <!--progress bar implementation-->
+                        <ProgressBar
+                            android:id="@+id/progress_bar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circular_shape"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/circular_progress_bar"
+                            android:textAlignment="center" />
+
+                        <!--Text implementation in center of the progress bar-->
+                        <TextView
+                            android:id="@+id/progress_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="---"
+                            android:textColor="@color/accent"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/text_view_top"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Height" />
+
+                        <TextView
+                            android:id="@+id/text_view_bottom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Weight" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/myfont"
+                android:text="Home"
+                android:paddingStart="20dp"
+                android:paddingTop="20dp"
+                android:textColor="@color/accent"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_home_food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/myfont"
+                android:paddingStart="20dp"
+                android:paddingTop="20dp"
+                android:text="Charts"
+                android:textColor="@color/accent"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/custom_edit_text_date_picker"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="dd/MM/yyyy"
+                    android:textSize="12sp"
+                    android:paddingVertical="14dp"
+                    android:textAlignment="center"
+                    app:drawableStartCompat="@drawable/baseline_date_range_24" />
+
+                <Spinner
+                    android:id="@+id/reportTypeSpn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:layout_toEndOf="@id/txtDateTime"
+                    android:textAlignment="center"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/chartCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="520dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="15dp"
+                    android:background="@drawable/custom_edittext"
+                    android:layout_below="@id/txtDateTime">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/barChart_card_title"
+                        android:layout_margin="12dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="50dp"/>
+
+                    <TextView
+                        android:id="@+id/btnViewHistory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:text="View history"
+                        android:textAlignment="center"
+                        android:contextClickable="true"
+                        android:textStyle="bold|italic"
+                        android:textColor="#3a94a2"
+                        android:layout_gravity="bottom|center"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/summaryCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="50dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="15dp"
+                    android:background="@drawable/custom_edittext"
+                    android:layout_below="@id/chartCard">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/calories_summary_card_title"
+                        android:layout_margin="12dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:stretchColumns="*"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:gravity="center">
+
+                        <TableRow>
+                            <TextView
+                                android:gravity="end"
+                                android:paddingEnd="10dp"
+                                android:id="@+id/txtMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="15dp"
+                                android:text="@string/max_calories"
+                                android:textSize="14sp"/>
+                            <TextView
+                                android:paddingStart="10dp"
+                                android:textStyle="bold|italic"
+                                android:id="@+id/txtMaxVal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Max Value"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="15dp"
+                                android:textColor="#32a055"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:gravity="end"
+                                android:paddingEnd="10dp"
+                                android:id="@+id/txtMin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/min_calories"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="15dp"/>
+                            <TextView
+                                android:paddingStart="10dp"
+                                android:textStyle="bold|italic"
+                                android:id="@+id/txtMinVal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Min Value"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="15dp"
+                                android:textColor="#cd3238"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:gravity="end"
+                                android:paddingEnd="10dp"
+                                android:id="@+id/txtAverage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/average_calories"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="15dp"/>
+                            <TextView
+                                android:paddingStart="10dp"
+                                android:textStyle="bold|italic"
+                                android:id="@+id/txtAverageVal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Average Value"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="15dp"
+                                android:textColor="#ddae49"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:gravity="end"
+                                android:paddingEnd="10dp"
+                                android:id="@+id/txtTotal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/total_calories"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="15dp"/>
+                            <TextView
+                                android:paddingStart="10dp"
+                                android:textStyle="bold|italic"
+                                android:id="@+id/txtTotalVal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total Value"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="15dp"
+                                android:textColor="#2061c1"/>
+                        </TableRow>
+
+                    </TableLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
