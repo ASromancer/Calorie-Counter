@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         btnForgot = findViewById(R.id.btn_forgot);
         btnSignup = findViewById(R.id.signupText);
         edtUserName.setText("hiep");
-        edtPassword.setText("12345");
+        edtPassword.setText("31100102");
     }
 
     private void setControl(){
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                         callApiGetAccount(username,token);
                         startActivity(intent);
                     } else {
-
+                        Toast.makeText(LoginActivity.this,"Sai tài khoản hoặc mật khẩu, vui lòng nhập lại!", Toast.LENGTH_SHORT).show();
                     }
                 }
 

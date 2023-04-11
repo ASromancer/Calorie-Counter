@@ -3,19 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_category"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="180dp"
+    android:layout_height="180dp"
     android:layout_margin="8dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical"
+    app:cardCornerRadius="10dp"
     android:padding="14dp">
 
     <ImageView
         android:id="@+id/iv_home_food_image"
-        android:layout_width="wrap_content"
+        android:alpha="0.8"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
         android:layout_height="match_parent"></ImageView>
+
+    <TextView
+        android:id="@+id/tv_home_food_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Text"
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
+        android:padding="16dp"
+        android:fontFamily="@font/myfont"
+        android:layout_gravity="center">
+    </TextView>
 
 
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFo
     @Override
     public void onBindViewHolder(@NonNull HomeFoodViewHolder holder, int position) {
         Category category = mListCategory.get(position);
-        //holder.tvName.setText(category.getName());
+        holder.tvName.setText(category.getName());
         Picasso.get().load(category.getImage()).into(holder.ivCategoryImage);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), FoodActivity.class);
@@ -54,11 +55,12 @@ public class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFo
 
         //        private TextView tvName;
         private ImageView ivCategoryImage;
+        private TextView tvName;
 
         public HomeFoodViewHolder(@NonNull View itemView) {
             super(itemView);
             ivCategoryImage = itemView.findViewById(R.id.iv_home_food_image);
-            //tvName = itemView.findViewById(R.id.tv_category_name);
+            tvName = itemView.findViewById(R.id.tv_home_food_name);
         }
     }
 }

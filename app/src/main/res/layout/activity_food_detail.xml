@@ -68,13 +68,13 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/tv_1"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Protein"
+                        android:layout_width="57dp"
                         android:fontFamily="@font/myfont"
                         android:layout_gravity="center"
                         android:textColor="@color/g_black"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -84,7 +84,7 @@
                         android:textColor="@color/g_black"
                         android:layout_gravity="center"
                         android:fontFamily="@font/myfont"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -102,7 +102,7 @@
                         android:drawablePadding="5dp"
                         android:fontFamily="@font/myfont"
                         android:textColor="@color/g_black"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_food_fat"
@@ -112,7 +112,7 @@
                         android:layout_gravity="center"
                         android:drawablePadding="5dp"
                         android:fontFamily="@font/myfont"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -130,7 +130,7 @@
                         android:drawablePadding="5dp"
                         android:fontFamily="@font/myfont"
                         android:layout_gravity="center"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_food_carb"
@@ -139,7 +139,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/myfont"
                         android:textColor="@color/g_black"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -157,7 +157,7 @@
                         android:fontFamily="@font/myfont"
                         android:drawablePadding="5dp"
                         android:textColor="@color/g_black"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <!-- Food ingredients list -->
                     <TextView
@@ -168,7 +168,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/myfont"
                         android:textColor="@color/g_black"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -178,11 +178,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
                 android:fontFamily="@font/myfont"
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="normal|bold"
+                android:justificationMode="inter_word"
+                android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/meal_info" />
@@ -204,6 +206,20 @@
         app:fabSize="normal"
         app:layout_anchor="@id/appBar"
         app:layout_anchorGravity="bottom|end"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_tracking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:baselineAlignBottom="false"
+        android:clickable="true"
+        android:src="@drawable/baseline_add_circle_outline_24"
+        app:backgroundTint="@color/accent"
+        app:fabSize="normal"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|start"
         app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

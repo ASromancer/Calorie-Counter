@@ -69,10 +69,13 @@ public class FavoriteActivity extends AppCompatActivity {
                                 // Xử lý khi chọn menu_search
                                 return true;
                             case R.id.add:
+                                Intent intentAdd = new Intent(FavoriteActivity.this, TrackingActivity.class);
+                                intentAdd.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                startActivity(intentAdd);
                                 // Xử lý khi chọn menu_notifications
                                 return true;
                             case R.id.favorite:
-
+                                recreate();
                                 // Xử lý khi chọn menu_profile
                                 return true;
                             case R.id.profile:
@@ -90,7 +93,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
     private void setInitial() {
         rcvFavorite = findViewById(R.id.rcv_favorite);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3, RecyclerView.VERTICAL, false);
         rcvFavorite.setLayoutManager(gridLayoutManager);
     }
 

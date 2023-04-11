@@ -3,6 +3,7 @@ package com.practice.giuakiretrofit.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,6 +15,8 @@ import com.practice.giuakiretrofit.client.RetrofitClient;
 import com.practice.giuakiretrofit.dto.UserInfo;
 import com.practice.giuakiretrofit.login.ForgotRequestUsernameOrEmail;
 import com.practice.giuakiretrofit.utils.AppConstants;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,6 +69,11 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(SignUpActivity.this,"Sign Up Failed!", Toast.LENGTH_SHORT).show();
+                    try {
+                        Log.i("ERROR", response.errorBody().string());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
             @Override

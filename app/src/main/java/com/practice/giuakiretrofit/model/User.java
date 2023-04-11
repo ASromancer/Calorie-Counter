@@ -76,7 +76,7 @@ public class User {
         this.dob = dob;
     }
 
-    public boolean isGender() {
+    public boolean getGender() {
         return gender;
     }
 

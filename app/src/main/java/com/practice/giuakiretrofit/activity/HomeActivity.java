@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.practice.giuakiretrofit.R;
 import com.practice.giuakiretrofit.adapter.CategoryAdapter;
+import com.practice.giuakiretrofit.adapter.HomeFoodAdapter;
 import com.practice.giuakiretrofit.api.CategoryApi;
 import com.practice.giuakiretrofit.client.RetrofitClient;
 import com.practice.giuakiretrofit.model.Category;
@@ -121,6 +122,9 @@ public class HomeActivity extends AppCompatActivity {
                                 // Xử lý khi chọn menu_search
                                 return true;
                             case R.id.add:
+                                Intent intentAdd = new Intent(HomeActivity.this, TrackingActivity.class);
+                                intentAdd.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                startActivity(intentAdd);
                                 // Xử lý khi chọn menu_notifications
                                 return true;
                             case R.id.favorite:
@@ -220,7 +224,6 @@ public class HomeActivity extends AppCompatActivity {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt = LocalDateTime.of(year, month, dayOfMonth, 0, 0, 0);
         String dateTime = ldt.format(formatter);
-        Log.i("call report api (dateTime & reportType)", dateTime + " " + reportType);
         String token = LoginActivity.token;
 
         Call<ReportResponse> call = reportApi.getReport("Bearer ".concat(token), userId, dateTime, reportType);
@@ -322,9 +325,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 mListCategory = response.body();
                 for (Category category : mListCategory) {
-                    Log.i(TAG, category.getName() + "");
                 }
-                CategoryAdapter adapter = new CategoryAdapter(mListCategory);
+                HomeFoodAdapter adapter = new HomeFoodAdapter(mListCategory);
                 rcvHomeFood.setAdapter(adapter);
             }
 

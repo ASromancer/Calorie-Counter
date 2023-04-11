@@ -30,7 +30,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
+    dexOptions {
+        incremental true
+    }
 }
+
+
+
 
 dependencies {
 
@@ -47,6 +54,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.bumptech.glide:glide:4.15.0'
+    implementation 'com.mikhaellopez:circularimageview:4.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

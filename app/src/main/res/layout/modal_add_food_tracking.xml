@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="14dp">
+        <EditText
+            android:id="@+id/edit_consumedGram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter consumed(gram)"
+            android:fontFamily="@font/myfont"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/btn_add_food"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:fontFamily="@font/myfont"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:text="Add food"/>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

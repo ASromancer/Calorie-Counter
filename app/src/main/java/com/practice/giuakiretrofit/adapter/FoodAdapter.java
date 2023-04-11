@@ -1,11 +1,14 @@
 package com.practice.giuakiretrofit.adapter;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.practice.giuakiretrofit.activity.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,12 +17,17 @@ import com.practice.giuakiretrofit.activity.FoodActivity;
 import com.practice.giuakiretrofit.model.*;
 import com.practice.giuakiretrofit.model.Category;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
     private List<Food> mListFood;
+
+    public static int foodId = 0;
+
+    private int mSelectedPosition = -1;
 
     public FoodAdapter(List<Food> mListFood) {
         this.mListFood = mListFood;
@@ -34,7 +42,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         Food food = mListFood.get(position);
-        Picasso.get().load(food.getImage()).into(holder.ivFoodImage);
+        if (food.getImage().isEmpty()){
+            holder.ivFoodImage.setImageResource(R.drawable.ic_no_food);
+        }
+        else {
+            Picasso.get().load(food.getImage()).into(holder.ivFoodImage);
+        }
         holder.tvName.setText(food.getName());
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), FoodDetailActivity.class);

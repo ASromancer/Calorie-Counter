@@ -36,7 +36,13 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Favorite favorite = mListFavorites.get(position);
-        holder.tvName.setText(favorite.getFood().getName());
+        //holder.tvName.setText(favorite.getFood().getName());
+        if(favorite.getFood().getName().isEmpty()){
+            return;
+        }
+        else {
+            Picasso.get().load(favorite.getFood().getImage()).into(holder.ivFavoriteFood);
+        }
         Picasso.get().load(favorite.getFood().getImage()).into(holder.ivFavoriteFood);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), FoodDetailActivity.class);
@@ -60,7 +66,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Catego
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tv_favorite_id_food_name);
+            //tvName = itemView.findViewById(R.id.tv_favorite_id_food_name);
             ivFavoriteFood = itemView.findViewById(R.id.iv_favorite_food);
         }
     }

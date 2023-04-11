@@ -68,11 +68,12 @@
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:textColor="@color/white"
                 android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/accent"
                 android:text="Login"
-                android:textSize="18sp"
-                android:background="@drawable/rounded_button"/>
+                android:textSize="18sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <TextView

@@ -7,17 +7,6 @@
     tools:context=".activity.CategoryActivity"
     android:id="@+id/meal_root"
     >
-
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/loading_gif_meals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/loading_gif"
-        android:visibility="gone"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +29,7 @@
             android:id="@+id/rcv_categories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#E0D9F1"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

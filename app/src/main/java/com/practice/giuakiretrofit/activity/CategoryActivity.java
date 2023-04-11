@@ -64,9 +64,13 @@ public class CategoryActivity extends AppCompatActivity {
                                 // Xử lý khi chọn menu_home
                                 return true;
                             case R.id.food:
+                                recreate();
                                 // Xử lý khi chọn menu_search
                                 return true;
                             case R.id.add:
+                                Intent intentAdd = new Intent(CategoryActivity.this, TrackingActivity.class);
+                                intentAdd.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                startActivity(intentAdd);
                                 // Xử lý khi chọn menu_notifications
                                 return true;
                             case R.id.favorite:

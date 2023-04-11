@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.practice.giuakiretrofit.adapter.HistoryViewAdapter;
 import com.practice.giuakiretrofit.dto.FoodTrackingHistory;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 

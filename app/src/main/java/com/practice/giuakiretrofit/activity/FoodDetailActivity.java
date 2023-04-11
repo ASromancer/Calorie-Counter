@@ -22,6 +22,8 @@ import com.practice.giuakiretrofit.adapter.FoodAdapter;
 import com.practice.giuakiretrofit.api.FoodApi;
 import com.practice.giuakiretrofit.client.RetrofitClient;
 import com.practice.giuakiretrofit.login.LoginResponse;
+import com.practice.giuakiretrofit.modal.AddFoodTrackingModal;
+import com.practice.giuakiretrofit.modal.EditProfileModal;
 import com.practice.giuakiretrofit.model.Favorite;
 import com.practice.giuakiretrofit.model.Food;
 import com.practice.giuakiretrofit.api.*;
@@ -40,7 +42,7 @@ public class FoodDetailActivity extends AppCompatActivity {
     private ImageView ivFoodImage;
 
     private List<Favorite> mListFavorites = new ArrayList<>();
-    private FloatingActionButton btnFavoriteAdd;
+    private FloatingActionButton btnFavoriteAdd, btnAddTracking;
 
     private CollapsingToolbarLayout collapsingToolbar;
 
@@ -60,6 +62,19 @@ public class FoodDetailActivity extends AppCompatActivity {
         callFoodDetail(foodId, LoginActivity.token);
         addFoodToFavorite(foodId, LoginActivity.token, LoginActivity.userId);
         callFavoriteApi(foodId);
+        addFoodTracking(foodId);
+    }
+
+    private void addFoodTracking(int foodId) {
+        btnAddTracking.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                AddFoodTrackingModal modal = new AddFoodTrackingModal();
+                Bundle args = new Bundle();
+                args.putInt("foodId", foodId);
+                modal.setArguments(args);
+                modal.show(getSupportFragmentManager(), "add_food_tracking_modal");
+            }
+        });
     }
 
     private void setInitial() {
@@ -70,6 +85,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         tvEnergyPerServing = findViewById(R.id.tv_energy_per_serving);
         ivFoodImage = findViewById(R.id.iv_food_image);
         btnFavoriteAdd = findViewById(R.id.btn_favorite_add);
+        btnAddTracking = findViewById(R.id.btn_add_tracking);
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         Intent intent = getIntent();
         foodId = intent.getExtras().getInt("foodId");
@@ -136,6 +152,8 @@ public class FoodDetailActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private void addFoodToFavorite(int foodId, String token, int userId){
         btnFavoriteAdd.setOnClickListener(new View.OnClickListener() {
