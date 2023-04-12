@@ -138,9 +138,6 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 mListCategory = response.body();
-                for (Category category : mListCategory) {
-                        Log.i(TAG, category.getName() + "");
-                }
                 CategoryAdapter adapter = new CategoryAdapter(mListCategory);
                 rcvCategories.setAdapter(adapter);
             }
@@ -160,9 +157,6 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
                 mFoodList = response.body();
-                for (Food food : mFoodList) {
-                    Log.i(TAG, food.getName() + "");
-                }
             }
 
             @Override

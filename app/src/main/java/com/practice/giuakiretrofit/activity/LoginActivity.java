@@ -77,11 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.code() == 200) {
                         LoginResponse loginResponse = response.body();
                         String accessToken = loginResponse.getAccessToken();
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         username = edtUserName.getText().toString().trim();
                         token = accessToken;
                         callApiGetAccount(username,token);
-                        startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this,"Sai tài khoản hoặc mật khẩu, vui lòng nhập lại!", Toast.LENGTH_SHORT).show();
                     }
@@ -122,6 +120,10 @@ public class LoginActivity extends AppCompatActivity {
                 account  = response.body();
                 user = account.getUser();
                 userId = user.getId();
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                intent.putExtra("weight", user.getWeight());
+                intent.putExtra("height", user.getHeight());
+                startActivity(intent);
             }
 
             @Override

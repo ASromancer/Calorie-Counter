@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.practice.giuakiretrofit.R;
 import com.practice.giuakiretrofit.adapter.CategoryAdapter;
 import com.practice.giuakiretrofit.adapter.HomeFoodAdapter;
+import com.practice.giuakiretrofit.adapter.TrackingListAdapter;
 import com.practice.giuakiretrofit.api.CategoryApi;
 import com.practice.giuakiretrofit.client.RetrofitClient;
 import com.practice.giuakiretrofit.model.Category;
@@ -58,12 +59,12 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView rcvHomeFood;
     private List<Category> mListCategory;
 
+    private double weight, height;
+
     private ProgressBar progressBar;
     private TextView progressText;
-
-    private Intent intent;
     private BarChart barChart;
-    private TextView txtDateTime, txtMaxVal, txtMinVal, txtAverageVal, txtTotalVal, txtViewHistory;
+    private TextView txtDateTime, txtMaxVal, txtMinVal, txtAverageVal, txtTotalVal, txtViewHistory, textProgressBar, tvWeight, tvHeight;
     private Calendar calendar;
     private Spinner reportTypeSpn;
     private List<String> reportTypes;
@@ -75,18 +76,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         setInitial();
         setControl();
-
     }
 
     private void setInitial() {
         // initial view components
         rcvHomeFood = findViewById(R.id.rcv_home_food);
-        progressBar = findViewById(R.id.progress_bar);
-        progressText = findViewById(R.id.progress_text);
+        progressBar = findViewById(R.id.home_progress_bar);
+        textProgressBar = findViewById(R.id.tv_progress_bar);
         rcvHomeFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        progressText.setText("69" + "%");
-        progressBar.setProgress(69);
 
         barChart = findViewById(R.id.barChart);
         txtDateTime = findViewById(R.id.txtDateTime);
@@ -96,9 +93,14 @@ public class HomeActivity extends AppCompatActivity {
         txtAverageVal = findViewById(R.id.txtAverageVal);
         txtTotalVal = findViewById(R.id.txtTotalVal);
 
+        tvWeight = findViewById(R.id.tv_home_weight);
+        tvHeight = findViewById(R.id.tv_home_height);
+
         txtViewHistory = findViewById(R.id.btnViewHistory);
 
-        intent = getIntent(); // Lấy thông tin kẹp trong LoginActivity sau khi chuyển hướng
+        Intent intent = getIntent(); // Lấy thông tin kẹp trong LoginActivity sau khi chuyển hướng
+        weight = intent.getDoubleExtra("weight", 0.0);
+        height = intent.getDoubleExtra("height", 0.0);
         calendar = Calendar.getInstance(); // Khởi tạo đối tượng Calendar
 
         // Nạp data cho Report type dropdown
@@ -114,6 +116,7 @@ public class HomeActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
                             case R.id.home:
                                 // Xử lý khi chọn menu_home
+                                recreate();
                                 return true;
                             case R.id.food:
                                 Intent intentFood = new Intent(HomeActivity.this, CategoryActivity.class);
@@ -153,7 +156,8 @@ public class HomeActivity extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH) + 1;
         // set current date for textView date
         txtDateTime.setText(String.format("%d/%d/%d", dayOfMonth, month, year));
-
+        tvWeight.setText(String.valueOf(weight) + " kg");
+        tvHeight.setText(String.valueOf(height) + " cm");
         // set item on click for spinner
         reportTypeSpn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -165,7 +169,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                callReportApi(LoginActivity.userId, dayOfMonth, month, year, "day");
             }
         });
 
@@ -230,15 +234,25 @@ public class HomeActivity extends AppCompatActivity {
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ReportResponse> call, Response<ReportResponse> response) {
-                ReportResponse reportResponse = response.body();
-
-                // Lưu lại consumed history để view nếu cần
-                if (reportResponse != null)
-                    trackingHistory = reportResponse.getConsumedHistory();
-                else trackingHistory = null;
-                // reportResponse cái này có thể null nên phải check trước khi xử lý gì đó
-                createChart(reportResponse);
-                createSummary(reportResponse);
+                if(response.code() == 200){
+                    ReportResponse reportResponse = response.body();
+                    if (reportResponse != null) {
+                        trackingHistory = reportResponse.getConsumedHistory();
+                        createChart(reportResponse);
+                        createSummary(reportResponse);
+                        double total = reportResponse.getTotal();
+                        textProgressBar.setText(total + "/2100");
+                        int percent = Double.valueOf((total/2100)*100).intValue();
+                        progressBar.setIndeterminate(false);
+                        progressBar.setProgress(percent);
+                        progressBar.invalidate();
+                        }
+                    }
+                    else {
+                        progressBar.setProgress(0);
+                        progressBar.invalidate();
+                        textProgressBar.setText("0/2100");
+                    }
             }
 
             @Override
