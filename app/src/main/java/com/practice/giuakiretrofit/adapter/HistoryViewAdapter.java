@@ -46,8 +46,8 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
                 .into(holder.foodImage);
         holder.txtConsumedDateTime.setText(historyList.get(position).getConsumedDatetime());
         holder.txtFoodName.setText(historyList.get(position).getFood().getName());
-        //holder.txtConsumedGram.setText(historyList.get(position).getConsumedGram().toString().concat(" gram"));
-        //holder.txtConsumedCalories.setText(historyList.get(position).getConsumedCalories().toString().concat(" kcal"));
+        holder.txtConsumedGram.setText(String.valueOf(historyList.get(position).getConsumedGram()).concat(" gram"));
+        holder.txtConsumedCalories.setText(String.valueOf(historyList.get(position).getConsumedCalories()).concat(" kcal"));
     }
 
     @Override

@@ -1,27 +1,9 @@
 package com.practice.giuakiretrofit.activity;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.practice.giuakiretrofit.R;
-import com.practice.giuakiretrofit.adapter.CategoryAdapter;
-import com.practice.giuakiretrofit.adapter.HomeFoodAdapter;
-import com.practice.giuakiretrofit.adapter.TrackingListAdapter;
-import com.practice.giuakiretrofit.api.CategoryApi;
-import com.practice.giuakiretrofit.client.RetrofitClient;
-import com.practice.giuakiretrofit.model.Category;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,16 +14,26 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.practice.giuakiretrofit.api.ReportApi;
-import com.practice.giuakiretrofit.client.RetrofitClient;
-import com.practice.giuakiretrofit.dto.FoodTrackingHistory;
-import com.practice.giuakiretrofit.dto.ReportResponse;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.practice.giuakiretrofit.R;
+import com.practice.giuakiretrofit.adapter.HomeFoodAdapter;
+import com.practice.giuakiretrofit.api.CategoryApi;
+import com.practice.giuakiretrofit.api.ReportApi;
+import com.practice.giuakiretrofit.client.RetrofitClient;
+import com.practice.giuakiretrofit.dto.FoodTrackingHistory;
+import com.practice.giuakiretrofit.dto.ReportResponse;
+import com.practice.giuakiretrofit.model.Category;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -70,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
     private List<String> reportTypes;
     private int dayOfMonth, month, year;
     private List<FoodTrackingHistory> trackingHistory; // Lưu lại consumed history list từ response trả về mỗi lần call api tạo chart
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,8 +149,8 @@ public class HomeActivity extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH) + 1;
         // set current date for textView date
         txtDateTime.setText(String.format("%d/%d/%d", dayOfMonth, month, year));
-        tvWeight.setText(String.valueOf(weight) + " kg");
-        tvHeight.setText(String.valueOf(height) + " cm");
+        tvWeight.setText(weight + " kg");
+        tvHeight.setText(height + " cm");
         // set item on click for spinner
         reportTypeSpn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -169,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                callReportApi(LoginActivity.userId, dayOfMonth, month, year, "day");
+                callReportApi(LoginActivity.userId, dayOfMonth, month, year, "DAY");
             }
         });
 
@@ -186,7 +179,7 @@ public class HomeActivity extends AppCompatActivity {
                     month = m + 1;
                     year = y;
                     callReportApi(
-                            1,
+                            LoginActivity.userId,
                             dayOfMonth,
                             month,
                             year,
@@ -200,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // View consumed food history
         txtViewHistory.setOnClickListener(view -> {
-            if(trackingHistory == null || trackingHistory.isEmpty()) {
+            if (trackingHistory == null || trackingHistory.isEmpty()) {
                 Toast.makeText(this, "No history data", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -222,6 +215,7 @@ public class HomeActivity extends AppCompatActivity {
                 reportTypes);
         reportTypeSpn.setAdapter(reportTypesAdapter);
     }
+
     private void callReportApi(int userId, int dayOfMonth, int month, int year, String reportType) {
         List<FoodTrackingHistory> trackingHistoryOfResponse;
         ReportApi reportApi = RetrofitClient.getRetrofitInstance().create(ReportApi.class);
@@ -234,25 +228,24 @@ public class HomeActivity extends AppCompatActivity {
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ReportResponse> call, Response<ReportResponse> response) {
-                if(response.code() == 200){
-                    ReportResponse reportResponse = response.body();
-                    if (reportResponse != null) {
-                        trackingHistory = reportResponse.getConsumedHistory();
-                        createChart(reportResponse);
-                        createSummary(reportResponse);
-                        double total = reportResponse.getTotal();
-                        textProgressBar.setText(total + "/2100");
-                        int percent = Double.valueOf((total/2100)*100).intValue();
-                        progressBar.setIndeterminate(false);
-                        progressBar.setProgress(percent);
-                        progressBar.invalidate();
-                        }
-                    }
-                    else {
-                        progressBar.setProgress(0);
-                        progressBar.invalidate();
-                        textProgressBar.setText("0/2100");
-                    }
+                ReportResponse reportResponse = response.body();
+                if (reportResponse != null) {
+                    trackingHistory = reportResponse.getConsumedHistory();
+                    double total = reportResponse.getTotal();
+                    textProgressBar.setText(total + "/2100");
+                    int percent = Double.valueOf((total / 2100) * 100).intValue();
+                    progressBar.setIndeterminate(false);
+                    progressBar.setProgress(percent);
+                    progressBar.invalidate();
+
+                } else {
+                    trackingHistory = null;
+                    progressBar.setProgress(0);
+                    progressBar.invalidate();
+                    textProgressBar.setText("0/2100");
+                }
+                createChart(reportResponse);
+                createSummary(reportResponse);
             }
 
             @Override
@@ -261,6 +254,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
     private void createChart(ReportResponse reportResponse) {
         List<String> labels = new ArrayList<>();
         List<BarEntry> entries = new ArrayList<>();
@@ -300,15 +294,15 @@ public class HomeActivity extends AppCompatActivity {
 //            barChart.offsetTopAndBottom(40);
 //            barChart.zoom(1.85f, 1.0f, 2, 2);
             barChart.invalidate(); // refresh
-        }
-        else {
+        } else {
             barChart.clear();
             barChart.setNoDataText("No data");
         }
     }
+
     private void createSummary(ReportResponse reportResponse) {
         String maxCal, minCal, averageCal, totalCal;
-        if(reportResponse != null) {
+        if (reportResponse != null) {
             maxCal = (reportResponse.getMax() != null) ? String.format("%.1f", reportResponse.getMax()) : "No data";
             minCal = (reportResponse.getMin() != null) ? String.format("%.1f", reportResponse.getMin()) : "No data";
             averageCal = (reportResponse.getAverage() != null) ? String.format("%.1f", reportResponse.getAverage()) : "No data";
@@ -330,7 +324,7 @@ public class HomeActivity extends AppCompatActivity {
         // do nothing
     }
 
-    private void callApiGetCategories(String token){
+    private void callApiGetCategories(String token) {
         CategoryApi categoryApi = RetrofitClient.getRetrofitInstance().create(CategoryApi.class);
         Call<List<Category>> call = categoryApi.getAllCategory("Bearer " + token);
         call.enqueue(new Callback<List<Category>>() {
